@@ -9,13 +9,9 @@ jobs:
     steps:
     - uses: actions/checkout@v3
     - name: Login to ACR
-      env:
-        AZURE_CREDENTIALS: ${{ secrets.AZURE_CREDENTIALS }}
       run: |
-        SP_APPID=$(echo $AZURE_CREDENTIALS | jq -e -r 'select(.clientId != null) | .clientId')
-        SP_PASSWORD=$(echo $AZURE_CREDENTIALS | jq -e -r 'select(.clientSecret != null) | .clientSecret')
-        echo $SP_APPID
-        docker login -u $SP_APPID -p $SP_PASSWORD akshaytestpoc.azurecr.io
+        #docker login -u $SP_APPID -p $SP_PASSWORD akshaytestpoc.azurecr.io
+        docker  login -u e36ff0ce-ab2c-469d-bf19-b39f49e30311 -p 27a.vw-rrzE~b2efhJcKnJId88aVklflZl akshaytestpoc.azurecr.io        
       shell: bash
 
     - name: Tag and push  image
