@@ -41,6 +41,7 @@ jobs:
       run: |
         echo -e "\e[34m[Tag and push spring-batch image]"
         sudo az aks install-cli
+        az login --service-principal --username e36ff0ce-ab2c-469d-bf19-b39f49e30311 --password 27a.vw-rrzE~b2efhJcKnJId88aVklflZl --tenant d4cca6d5-3d09-4946-95f5-e376defce6d1
         az account set --subscription 68781233-909c-4196-a987-91a7f7f997be
         az aks get-credentials --resource-group ak-dev-nl1 --name aks-cluster
         kubectl get nodes
