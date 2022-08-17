@@ -30,7 +30,7 @@ jobs:
         docker tag mcr.microsoft.com/azuredocs/azure-vote-front:v1 akshaytestpoc.azurecr.io/azure-vote-front:v1
         docker push akshaytestpoc.azurecr.io/azure-vote-front:v1
         docker tag tiangolo/uwsgi-nginx-flask:python3.6    akshaytestpoc.azurecr.io/nginx-flask:python3.6
-        docker push akshaytestpoc.azurecr.io/azure-vote-front:v1
-        docker tag mcr.microsoft.com/oss/bitnami/redis:6.0.8  akshaytestpoc.azurecr.io/azure-vote-front:6.0.8
-        docker push akshaytestpoc.azurecr.io/azure-vote-front:v1
+        docker push akshaytestpoc.azurecr.io/nginx-flask:python3.6
+        docker tag mcr.microsoft.com/oss/bitnami/redis:6.0.8  akshaytestpoc.azurecr.io/redis:6.0.8
+        docker push akshaytestpoc.azurecr.io/redis:6.0.8
       shell: bash
