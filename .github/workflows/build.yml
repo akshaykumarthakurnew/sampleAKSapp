@@ -40,7 +40,7 @@ jobs:
         AZURE_CREDENTIALS: ${{ secrets.AZURE_CREDENTIALS }}
       run: |
         echo -e "\e[34m[Tag and push spring-batch image]"
-        az aks install-cli
+        sudo az aks install-cli
         az account set --subscription 68781233-909c-4196-a987-91a7f7f997be
         az aks get-credentials --resource-group ak-dev-nl1 --name aks-cluster
         kubectl get nodes
