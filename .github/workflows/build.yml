@@ -14,6 +14,7 @@ jobs:
       run: |
         SP_APPID=$(echo $AZURE_CREDENTIALS | jq -e -r 'select(.clientId != null) | .clientId')
         SP_PASSWORD=$(echo $AZURE_CREDENTIALS | jq -e -r 'select(.clientSecret != null) | .clientSecret')
+        echo $SP_APPID
         docker login -u $SP_APPID -p $SP_PASSWORD akshaytestpoc.azurecr.io
       shell: bash
 
