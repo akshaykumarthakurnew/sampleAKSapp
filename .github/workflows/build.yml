@@ -12,14 +12,6 @@ jobs:
       run: |
         docker-compose up -d
         docker images
-    #- name: Tag and push  image
-    #  run: |
-    #    echo -e "\e[34m[Tag and push Docker image]"
-    #    docker  login -u e36ff0ce-ab2c-469d-bf19-b39f49e30311 -p 27a.vw-rrzE~b2efhJcKnJId88aVklflZl akshaytestpoc.azurecr.io   
-    #    docker tag mcr.microsoft.com/azuredocs/azure-vote-front:v1 akshaytestpoc.azurecr.io/azure-vote-front:v1
-    #    docker push akshaytestpoc.azurecr.io/azure-vote-front:v1
-    #    az acr repository list --name akshaytestpoc.azurecr.io --output table
-    #  shell: bash
     - name: Login to ACR
       env:
         AZURE_CREDENTIALS: ${{ secrets.AZURE_CREDENTIALS }}
@@ -36,5 +28,9 @@ jobs:
       run: |
         echo -e "\e[34m[Tag and push spring-batch image]"
         docker tag mcr.microsoft.com/azuredocs/azure-vote-front:v1 akshaytestpoc.azurecr.io/azure-vote-front:v1
+        docker push akshaytestpoc.azurecr.io/azure-vote-front:v1
+        docker tag tiangolo/uwsgi-nginx-flask:python3.6    akshaytestpoc.azurecr.io/nginx-flask:python3.6
+        docker push akshaytestpoc.azurecr.io/azure-vote-front:v1
+        docker tag mcr.microsoft.com/oss/bitnami/redis:6.0.8  akshaytestpoc.azurecr.io/azure-vote-front:6.0.8
         docker push akshaytestpoc.azurecr.io/azure-vote-front:v1
       shell: bash
