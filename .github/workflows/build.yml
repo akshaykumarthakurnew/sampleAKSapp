@@ -12,12 +12,29 @@ jobs:
       run: |
         docker-compose up -d
         docker images
-    - name: Tag and push  image
+    #- name: Tag and push  image
+    #  run: |
+    #    echo -e "\e[34m[Tag and push Docker image]"
+    #    docker  login -u e36ff0ce-ab2c-469d-bf19-b39f49e30311 -p 27a.vw-rrzE~b2efhJcKnJId88aVklflZl akshaytestpoc.azurecr.io   
+    #    docker tag mcr.microsoft.com/azuredocs/azure-vote-front:v1 akshaytestpoc.azurecr.io/azure-vote-front:v1
+    #    docker push akshaytestpoc.azurecr.io/azure-vote-front:v1
+    #    az acr repository list --name akshaytestpoc.azurecr.io --output table
+    #  shell: bash
+    - name: Login to ACR
+      env:
+        AZURE_CREDENTIALS: ${{ secrets.AZURE_CREDENTIALS }}
       run: |
-        echo -e "\e[34m[Tag and push Docker image]"
-        docker  login -u e36ff0ce-ab2c-469d-bf19-b39f49e30311 -p 27a.vw-rrzE~b2efhJcKnJId88aVklflZl akshaytestpoc.azurecr.io   
-        docker tag mcr.microsoft.com/azuredocs/azure-vote-front:v1 akshaytestpoc.azurecr.io/azure-vote-front:v1
-        docker push akshaytestpoc.azurecr.io/azure-vote-front:v1
-        az acr repository list --name akshaytestpoc.azurecr.io --output table
+        SP_APPID=$(echo $AZURE_CREDENTIALS | jq -e -r 'select(.clientId != null) | .clientId')
+        SP_PASSWORD=$(echo $AZURE_CREDENTIALS | jq -e -r 'select(.clientSecret != null) | .clientSecret')
+        docker login -u $SP_APPID -p $SP_PASSWORD akshaytestpoc.azurecr.io
       shell: bash
 
+    ## push image to registry
+    - name: Tag and push spring-batch image
+      env:
+        AZURE_CREDENTIALS: ${{ secrets.AZURE_CREDENTIALS }}
+      run: |
+        echo -e "\e[34m[Tag and push spring-batch image]"
+        docker tag mcr.microsoft.com/azuredocs/azure-vote-front:v1 akshaytestpoc.azurecr.io/azure-vote-front:v1
+        docker push akshaytestpoc.azurecr.io/azure-vote-front:v1
+      shell: bash
