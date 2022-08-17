@@ -8,9 +8,11 @@ jobs:
 
     steps:
     - uses: actions/checkout@v3
+    - name: image creation
+      run: |
+        docker-compose up -d
+        docker images
     - name: Tag and push  image
-      env:
-        AZURE_CREDENTIALS: ${{ secrets.AZURE_CREDENTIALS }}
       run: |
         echo -e "\e[34m[Tag and push Docker image]"
         docker  login -u e36ff0ce-ab2c-469d-bf19-b39f49e30311 -p 27a.vw-rrzE~b2efhJcKnJId88aVklflZl akshaytestpoc.azurecr.io   
